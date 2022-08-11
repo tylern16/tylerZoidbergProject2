@@ -12,6 +12,7 @@ require('dotenv').config()
 //___________________
 // Allow use of Heroku's port or your own local port, depending on the environment
 const PORT = process.env.PORT || 3003;
+const Dog = require('./models/dogSchema.js')
 
 //___________________
 //Database
@@ -47,12 +48,79 @@ app.use(methodOverride('_method'));// allow POST, PUT and DELETE from a form
 //___________________
 // Routes
 //___________________
-//localhost:3000
-app.get('/' , (req, res) => {
-  res.send('Hello World!');
+//index route
+app.get('/home' , (req, res) => {
+  Dog.find({}, (err, foundDogs) => {
+    res.render(
+      'index.ejs',
+      {
+        data: foundDogs
+      }
+    )
+  })
 });
+
+//new route
+app.get('/home/new', (req, res) => {
+  res.render('new.ejs')
+})
+
+//create route
+app.post('/home', (req, res) => {
+  Dog.create(req.body, (err, newDog) => {
+    console.log(req.body)
+    res.redirect('/home')
+  })
+})
+
+//
+// //edit route
+// app.get('/cart/:id/edit', (req, res)=>{
+//     Cart.findById(req.params.id, (err, data)=>{
+//         res.render(
+//     		'edit.ejs',
+//     		{
+//     			cart: data
+//     		}
+//     	);
+//     });
+// });
+//
+// //update route
+// app.put('/cart/:id', (req, res)=>{
+//   // if (req.body.affordable === 'on') {
+//   //   req.body.affordable = true
+//   // } else {
+//   //   req.body.affordable = false
+//   // }
+//   Cart.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, updatedModel)=>{
+//       res.redirect('/cart');
+//   });
+// });
+//
+//
+//show  route
+app.get('/home/:id', (req, res) => {
+  Dog.findById(req.params.id, (err, foundDog) => {
+    res.render(
+      'show.ejs',
+      {
+        dog: foundDog
+      }
+    )
+  })
+})
+//
+// //delete route
+// app.delete('/cart/:id', (req, res) => {
+//   Cart.findByIdAndRemove(req.params.id, (error, deletedItem) => {
+//     res.redirect('/cart')
+//   })
+// })
 
 //___________________
 //Listener
 //___________________
-app.listen(PORT, () => console.log( 'Listening on port:', PORT));
+// app.listen(PORT, () => console.log( 'Listening on port:', PORT));
+//edited listener
+app.listen(PORT, () => console.log( 'Listening...'));

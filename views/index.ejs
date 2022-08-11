@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Dog Instagram</h1>
+    <h3>Index</h3>
+    <a href="/home/new">New</a>
+    <ul>
+      <% for (let i = 0; i < data.length; i++) { %>
+        <li><a href="/home/<%=data[i]._id%>"> <%= data[i].name%> </a></li>
+      <% } %>
+    </ul>
+  </body>
+</html>
