@@ -74,31 +74,25 @@ app.post('/', (req, res) => {
 })
 
 //
-// //edit route
-// app.get('/cart/:id/edit', (req, res)=>{
-//     Cart.findById(req.params.id, (err, data)=>{
-//         res.render(
-//     		'edit.ejs',
-//     		{
-//     			cart: data
-//     		}
-//     	);
-//     });
-// });
-//
-// //update route
-// app.put('/cart/:id', (req, res)=>{
-//   // if (req.body.affordable === 'on') {
-//   //   req.body.affordable = true
-//   // } else {
-//   //   req.body.affordable = false
-//   // }
-//   Cart.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, updatedModel)=>{
-//       res.redirect('/cart');
-//   });
-// });
-//
-//
+//edit route -- comment out on deployment
+app.get('/:id/edit', (req, res)=>{
+    Dog.findById(req.params.id, (err, data)=>{
+        res.render(
+    		'edit.ejs',
+    		{
+    			dog: data
+    		}
+    	)
+    })
+})
+
+//update route -- comment out on deployment
+app.put('/:id', (req, res)=>{
+  Dog.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, newDog)=>{
+      res.redirect('/')
+  })
+})
+
 //show  route
 app.get('/:id', (req, res) => {
   Dog.findById(req.params.id, (err, foundDog) => {
@@ -110,17 +104,15 @@ app.get('/:id', (req, res) => {
     )
   })
 })
-//
-// //delete route
-// app.delete('/cart/:id', (req, res) => {
-//   Cart.findByIdAndRemove(req.params.id, (error, deletedItem) => {
-//     res.redirect('/cart')
-//   })
-// })
+
+//delete route -- comment out on deployment
+app.delete('/:id', (req, res) => {
+  Dog.findByIdAndRemove(req.params.id, (error, deletedItem) => {
+    res.redirect('/')
+  })
+})
 
 //___________________
 //Listener
 //___________________
-// app.listen(PORT, () => console.log( 'Listening on port:', PORT));
-//edited listener
-app.listen(PORT, () => console.log( 'Listening...'));
+app.listen(PORT, () => console.log( 'Listening on port:', PORT));

@@ -6,6 +6,11 @@
   </head>
   <body>
     <h1><%=dog.name%></h1>
-    <a href="/">Back</a>
+    <a href="/">Back</a><br>
+    <p><%=dog.description%></p>
+    <a href="/<%=dog.id%>/edit">Edit</a>
+    <form action="/<%=dog.id%>?_method=DELETE" method="POST">
+      <input type="Submit" value="Delete"/>
+    </form>
   </body>
 </html>
