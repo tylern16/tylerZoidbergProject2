@@ -49,7 +49,7 @@ app.use(methodOverride('_method'));// allow POST, PUT and DELETE from a form
 // Routes
 //___________________
 //index route
-app.get('/home' , (req, res) => {
+app.get('/' , (req, res) => {
   Dog.find({}, (err, foundDogs) => {
     res.render(
       'index.ejs',
@@ -61,15 +61,15 @@ app.get('/home' , (req, res) => {
 });
 
 //new route
-app.get('/home/new', (req, res) => {
+app.get('/new', (req, res) => {
   res.render('new.ejs')
 })
 
 //create route
-app.post('/home', (req, res) => {
+app.post('/', (req, res) => {
   Dog.create(req.body, (err, newDog) => {
     console.log(req.body)
-    res.redirect('/home')
+    res.redirect('/')
   })
 })
 
@@ -100,7 +100,7 @@ app.post('/home', (req, res) => {
 //
 //
 //show  route
-app.get('/home/:id', (req, res) => {
+app.get('/:id', (req, res) => {
   Dog.findById(req.params.id, (err, foundDog) => {
     res.render(
       'show.ejs',
