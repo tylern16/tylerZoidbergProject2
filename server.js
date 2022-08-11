@@ -7,12 +7,12 @@ const mongoose = require ('mongoose');
 const app = express ();
 const db = mongoose.connection;
 require('dotenv').config()
+const dogsController = require('./controllers/dogs.js')
 //___________________
 //Port
 //___________________
 // Allow use of Heroku's port or your own local port, depending on the environment
 const PORT = process.env.PORT || 3003;
-const Dog = require('./models/dogSchema.js')
 
 //___________________
 //Database
@@ -44,73 +44,10 @@ app.use(express.json());// returns middleware that only parses JSON - may or may
 //use method override
 app.use(methodOverride('_method'));// allow POST, PUT and DELETE from a form
 
+//controller file
+app.use(dogsController)
 
-//___________________
-// Routes
-//___________________
-//index route
-app.get('/' , (req, res) => {
-  Dog.find({}, (err, foundDogs) => {
-    res.render(
-      'index.ejs',
-      {
-        data: foundDogs
-      }
-    )
-  })
-});
 
-//new route
-app.get('/new', (req, res) => {
-  res.render('new.ejs')
-})
-
-//create route
-app.post('/', (req, res) => {
-  Dog.create(req.body, (err, newDog) => {
-    console.log(req.body)
-    res.redirect('/')
-  })
-})
-
-//
-//edit route -- comment out on deployment
-app.get('/:id/edit', (req, res)=>{
-    Dog.findById(req.params.id, (err, data)=>{
-        res.render(
-    		'edit.ejs',
-    		{
-    			dog: data
-    		}
-    	)
-    })
-})
-
-//update route -- comment out on deployment
-app.put('/:id', (req, res)=>{
-  Dog.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, newDog)=>{
-      res.redirect('/')
-  })
-})
-
-//show  route
-app.get('/:id', (req, res) => {
-  Dog.findById(req.params.id, (err, foundDog) => {
-    res.render(
-      'show.ejs',
-      {
-        dog: foundDog
-      }
-    )
-  })
-})
-
-//delete route -- comment out on deployment
-app.delete('/:id', (req, res) => {
-  Dog.findByIdAndRemove(req.params.id, (error, deletedItem) => {
-    res.redirect('/')
-  })
-})
 
 //___________________
 //Listener
