@@ -2,6 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <%- include ('../partials/head.ejs') %>
+    <!-- <script src="app.js" charset="utf-8"></script> -->
     <title></title>
   </head>
   <body>
@@ -11,7 +12,7 @@
     </form>
     <table>
       <thead>
-        <tr>
+        <tr class='row-header'>
           <td>Name</td>
           <td>Importance</td>
           <td>Completed?</td>
@@ -42,6 +43,15 @@
       </tbody>
 
     </table>
-
+    <script>
+      const changeColor = () => {
+        $('.row-header').on('click', () => {
+          $('.row-header').css('background-color','green')
+        })
+      }
+      $(() => {
+        changeColor()
+      })
+    </script>
   </body>
 </html>

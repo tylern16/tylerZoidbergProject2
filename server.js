@@ -48,9 +48,6 @@ app.use(methodOverride('_method'));// allow POST, PUT and DELETE from a form
 //controller file
 app.use(tasksController)
 
-//JS
-// const image = path.dirname(codingImage.jpeg)
-
 
 //___________________
 //Listener

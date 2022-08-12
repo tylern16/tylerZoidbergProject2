@@ -18,6 +18,13 @@ const getNumOfDaysLeft = (date2) => {
   return daysLeft
 }
 
+const changeColor =  () => {
+  let element = document.querySelector('.row-header')
+  element.onclick = () => {
+    element.style.backgroundcolor = 'green'
+  }
+}
+
 //select td
 //if td if high set background color to red
 // const showImportanceColor = () => {
@@ -87,7 +94,8 @@ router.get('/:id', (req, res) => {
     res.render(
       'show.ejs',
       {
-        task: foundTask
+        task: foundTask,
+        getNumOfDaysLeft: getNumOfDaysLeft
       }
     )
   })
