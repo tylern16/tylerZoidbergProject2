@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
+    <%- include ('../partials/head.ejs') %>
     <title></title>
   </head>
   <body>
-    <h1><%=dog.name%></h1>
     <a href="/">Back</a><br>
-    <p><%=dog.description%></p>
-    <a href="/<%=dog.id%>/edit">Edit</a>
-    <form action="/<%=dog.id%>?_method=DELETE" method="POST">
+    <h1> <%=task.name%> </h1>
+    Importance: <p><%=task.importance%></p>
+    Due Date: <p><%=task.dueDate%></p>
+    Description: <p><%=task.description%></p>
+    <a href="/<%=task.id%>/edit">Edit</a>
+    <form action="/<%=task.id%>?_method=DELETE" method="POST">
       <input type="Submit" value="Delete"/>
     </form>
   </body>

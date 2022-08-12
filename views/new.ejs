@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
+    <%- include ('../partials/head.ejs') %>
     <title></title>
   </head>
   <body>
-    <h1>New Dog</h1>
+    <h1>New Task</h1>
     <form action="/" method="POST">
-      Name: <input type="text" name="name" value="" placeholder="Name"><br>
-      Description: <input type="text" name="description" value="" placeholder="Description"><br>
-      <input type="submit" value="Submit">
+      Name*: <input type="text" name="name" value="" placeholder="Name" required><br>
+      Due Date*: <input type="date" name="dueDate" value="" required><br>
+      Importance:
+      <div class="radio-container">
+        <input type="radio" id="importanceChoice1" name="importance" value="High">High
+        <input type="radio" id="importanceChoice2" name="importance" value="Medium" checked>Medium
+        <input type="radio" id="importanceChoice3" name="importance" value="Low">Low
+      </div>
+      Descripition: <textarea rows="5" cols="60" name="description" placeholder="enter detail here..."></textarea><br>
+      <input type="submit" value="Create">
     </form>
   </body>
 </html>

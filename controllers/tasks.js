@@ -2,18 +2,18 @@ const express = require('express');
 const router = express.Router();
 
 //Models
-const Dog = require('../models/dogSchema.js')
+const Tasks = require('../models/taskSchema.js')
 
 //___________________
 // Routes
 //___________________
 //index route
 router.get('/' , (req, res) => {
-  Dog.find({}, (err, foundDogs) => {
+  Tasks.find({}, (err, foundTasks) => {
     res.render(
       'index.ejs',
       {
-        data: foundDogs
+        data: foundTasks
       }
     )
   })
@@ -26,8 +26,7 @@ router.get('/new', (req, res) => {
 
 //create route
 router.post('/', (req, res) => {
-  Dog.create(req.body, (err, newDog) => {
-    console.log(req.body)
+  Tasks.create(req.body, (err, newTask) => {
     res.redirect('/')
   })
 })
@@ -35,11 +34,11 @@ router.post('/', (req, res) => {
 //
 //edit route -- comment out on deployment
 router.get('/:id/edit', (req, res)=>{
-    Dog.findById(req.params.id, (err, data)=>{
+    Tasks.findById(req.params.id, (err, data)=>{
         res.render(
     		'edit.ejs',
     		{
-    			dog: data
+    			task: data
     		}
     	)
     })
@@ -47,18 +46,18 @@ router.get('/:id/edit', (req, res)=>{
 
 //update route -- comment out on deployment
 router.put('/:id', (req, res)=>{
-  Dog.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, newDog)=>{
+  Tasks.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, newTask)=>{
       res.redirect('/')
   })
 })
 
 //show  route
 router.get('/:id', (req, res) => {
-  Dog.findById(req.params.id, (err, foundDog) => {
+  Tasks.findById(req.params.id, (err, foundTask) => {
     res.render(
       'show.ejs',
       {
-        dog: foundDog
+        task: foundTask
       }
     )
   })
@@ -66,7 +65,7 @@ router.get('/:id', (req, res) => {
 
 //delete route -- comment out on deployment
 router.delete('/:id', (req, res) => {
-  Dog.findByIdAndRemove(req.params.id, (error, deletedItem) => {
+  Tasks.findByIdAndRemove(req.params.id, (error, deletedItem) => {
     res.redirect('/')
   })
 })

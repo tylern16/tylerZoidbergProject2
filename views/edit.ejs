@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
+    <%- include ('../partials/head.ejs') %>
     <title></title>
   </head>
   <body>
     <h1>Edit</h1>
-    <form  action="/<%=dog.id%>?_method=PUT" method="POST">
-      Name: <input type="text" name="name" value="<%=dog.name%>" ><br>
-      Description: <input type="text" name="description" value="<%=dog.description%>" ><br>
+    <form  action="/<%=task.id%>?_method=PUT" method="POST">
+      Name: <input type="text" name="name" value="<%=task.name%>" ><br>
+      Due Date: <input type="date" name="dueDate" value="<%=task.dueDate%>"><br>
+      Importance:
+      <div class="radio-container">
+        <input type="radio" id="importanceChoice1" name="importance" value="High">High
+        <input type="radio" id="importanceChoice2" name="importance" value="Medium">Medium
+        <input type="radio" id="importanceChoice3" name="importance" value="Low">Low
+      </div>
+      Description: <textarea rows="5" cols="60" name="description" ><%=task.description%></textarea><br>
       <input type="submit" value="Confirm">
     </form>
   </body>

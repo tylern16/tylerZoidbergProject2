@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
+    <%- include ('../partials/head.ejs') %>
     <title></title>
   </head>
   <body>
-    <h1>Dog Instagram</h1>
-    <h3>Index</h3>
-    <a href="/new">New</a>
-    <ul>
+    <h1>Task Manager</h1>
+    <form class="" action="/new" method="get">
+          <button type="submit" name="New">New</button>
+    </form>
+    <table>
       <% for (let i = 0; i < data.length; i++) { %>
-        <li><a href="/<%=data[i]._id%>"> <%= data[i].name%> </a></li>
+        <tr>
+          <td><a href="/<%=data[i]._id%>"> <%= data[i].name%></a> </td>
+          <td><%=data[i].dueDate%></td>
+        </tr>
       <% } %>
-    </ul>
+    </table>
+
   </body>
 </html>

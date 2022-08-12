@@ -7,7 +7,8 @@ const mongoose = require ('mongoose');
 const app = express ();
 const db = mongoose.connection;
 require('dotenv').config()
-const dogsController = require('./controllers/dogs.js')
+const tasksController = require('./controllers/tasks.js')
+
 //___________________
 //Port
 //___________________
@@ -45,8 +46,10 @@ app.use(express.json());// returns middleware that only parses JSON - may or may
 app.use(methodOverride('_method'));// allow POST, PUT and DELETE from a form
 
 //controller file
-app.use(dogsController)
+app.use(tasksController)
 
+//JS
+// const image = path.dirname(codingImage.jpeg)
 
 
 //___________________
