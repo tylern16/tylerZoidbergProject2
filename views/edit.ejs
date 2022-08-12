@@ -11,11 +11,12 @@
       Due Date: <input type="date" name="dueDate" value="<%=task.dueDate%>"><br>
       Importance:
       <div class="radio-container">
-        <input type="radio" id="importanceChoice1" name="importance" value="High">High
-        <input type="radio" id="importanceChoice2" name="importance" value="Medium">Medium
-        <input type="radio" id="importanceChoice3" name="importance" value="Low">Low
+        <input type="radio" id="importanceChoice1" name="importance" value="High" <% if(task.importance === 'High') { %> checked <% } %> >High
+        <input type="radio" id="importanceChoice2" name="importance" value="Medium" <% if(task.importance === 'Medium') { %> checked <% } %>>Medium
+        <input type="radio" id="importanceChoice3" name="importance" value="Low" <% if(task.importance === 'Low') { %> checked <% } %>>Low
       </div>
       Description: <textarea rows="5" cols="60" name="description" ><%=task.description%></textarea><br>
+      Completed: <input type="checkbox" name="completed"  ><br>  
       <input type="submit" value="Confirm">
     </form>
   </body>

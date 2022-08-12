@@ -4,6 +4,22 @@ const router = express.Router();
 //Models
 const Tasks = require('../models/taskSchema.js')
 
+//JS
+//get todays date in yyyy-mm-dd format
+//date2 will be input
+//do math in milliseconds
+const getNumOfDaysLeft = (date2) => {
+  let today = new Date().getTime()
+  console.log(today);
+  let dueDate = new Date(date2).getTime()
+  console.log(dueDate);
+  daysLeft = Math.floor((dueDate - today)/(1000 * 60 * 60 * 24))
+  console.log(daysLeft);
+}
+getNumOfDaysLeft("2022-08-25")
+
+
+
 //___________________
 // Routes
 //___________________
@@ -26,6 +42,8 @@ router.get('/new', (req, res) => {
 
 //create route
 router.post('/', (req, res) => {
+  req.body.completed = false
+  // console.log(req.body);
   Tasks.create(req.body, (err, newTask) => {
     res.redirect('/')
   })
@@ -46,6 +64,11 @@ router.get('/:id/edit', (req, res)=>{
 
 //update route -- comment out on deployment
 router.put('/:id', (req, res)=>{
+  if (req.body.completed === 'on') {
+    req.body.completed = true
+  } else {
+    req.body.completed = false
+  }
   Tasks.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, newTask)=>{
       res.redirect('/')
   })

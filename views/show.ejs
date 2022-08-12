@@ -10,6 +10,8 @@
     Importance: <p><%=task.importance%></p>
     Due Date: <p><%=task.dueDate%></p>
     Description: <p><%=task.description%></p>
+    Team: <p><%=task.team%></p>
+    Completed: <p><%=task.completed%></p>
     <a href="/<%=task.id%>/edit">Edit</a>
     <form action="/<%=task.id%>?_method=DELETE" method="POST">
       <input type="Submit" value="Delete"/>

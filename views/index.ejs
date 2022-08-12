@@ -12,7 +12,14 @@
     <table>
       <% for (let i = 0; i < data.length; i++) { %>
         <tr>
-          <td><a href="/<%=data[i]._id%>"> <%= data[i].name%></a> </td>
+          <td><a href="/<%=data[i]._id%>"><%=data[i].name%></a> </td>
+          <td>
+            <% if (data[i].completed === true) { %>
+              <p>Yes</p>
+            <% } else { %>
+              <p>Not Yet</p>
+            <% } %>
+          </td>
           <td><%=data[i].dueDate%></td>
         </tr>
       <% } %>
