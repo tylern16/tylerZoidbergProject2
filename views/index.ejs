@@ -10,19 +10,37 @@
           <button type="submit" name="New">New</button>
     </form>
     <table>
-      <% for (let i = 0; i < data.length; i++) { %>
+      <thead>
         <tr>
-          <td><a href="/<%=data[i]._id%>"><%=data[i].name%></a> </td>
-          <td>
-            <% if (data[i].completed === true) { %>
-              <p>Yes</p>
-            <% } else { %>
-              <p>Not Yet</p>
-            <% } %>
-          </td>
-          <td><%=data[i].dueDate%></td>
+          <td>Name</td>
+          <td>Importance</td>
+          <td>Completed?</td>
+          <td>Days Left</td>
         </tr>
-      <% } %>
+      </thead>
+      <tbody>
+        <% for (let i = 0; i < data.length; i++) { %>
+          <tr>
+            <td><a href="/<%=data[i]._id%>"><%=data[i].name%></a> </td>
+            <% if (data[i].importance === 'High') { %>
+              <td class='importance high'><%=data[i].importance%></td>
+            <% } else if (data[i].importance === 'Medium') {%>
+              <td class='importance medium'><%=data[i].importance%></td>
+            <% } else {%>
+              <td class='importance low'><%=data[i].importance%></td>
+            <% } %>
+            <td>
+              <% if (data[i].completed === true) { %>
+                <p>Yes</p>
+              <% } else { %>
+                <p>Not Yet</p>
+              <% } %>
+            </td>
+            <td><%=getNumOfDaysLeft(data[i].dueDate)%></td>
+          </tr>
+        <% } %>
+      </tbody>
+
     </table>
 
   </body>

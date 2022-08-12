@@ -10,15 +10,21 @@ const Tasks = require('../models/taskSchema.js')
 //do math in milliseconds
 const getNumOfDaysLeft = (date2) => {
   let today = new Date().getTime()
-  console.log(today);
+  // console.log(today);
   let dueDate = new Date(date2).getTime()
-  console.log(dueDate);
+  // console.log(dueDate);
   daysLeft = Math.floor((dueDate - today)/(1000 * 60 * 60 * 24))
-  console.log(daysLeft);
+  // console.log(daysLeft);
+  return daysLeft
 }
-getNumOfDaysLeft("2022-08-25")
 
-
+//select td
+//if td if high set background color to red
+// const showImportanceColor = () => {
+//   let element = document.querySelector('.importance')
+//   console.log(element);
+// }
+// showImportanceColor()
 
 //___________________
 // Routes
@@ -29,7 +35,8 @@ router.get('/' , (req, res) => {
     res.render(
       'index.ejs',
       {
-        data: foundTasks
+        data: foundTasks,
+        getNumOfDaysLeft: getNumOfDaysLeft
       }
     )
   })

@@ -1,1 +1,9 @@
-
+.high {
+  background-color: red;
+}
+.medium {
+  background-color: yellow;
+}
+.low {
+  background-color: green;
+}

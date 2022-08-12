@@ -9,6 +9,7 @@
     <h1> <%=task.name%> </h1>
     Importance: <p><%=task.importance%></p>
     Due Date: <p><%=task.dueDate%></p>
+    <p>Days Left: <%=getNumOfDaysLeft(data[i].dueDate)%></p>
     Description: <p><%=task.description%></p>
     Team: <p><%=task.team%></p>
     Completed: <p><%=task.completed%></p>
