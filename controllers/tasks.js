@@ -57,7 +57,7 @@ router.get('/new', (req, res) => {
 //create route
 router.post('/', (req, res) => {
   req.body.completed = false
-  // console.log(req.body);
+  console.log(req.body.name);
   Tasks.create(req.body, (err, newTask) => {
     res.redirect('/')
   })
@@ -83,6 +83,7 @@ router.put('/:id', (req, res)=>{
   } else {
     req.body.completed = false
   }
+
   Tasks.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, newTask)=>{
       res.redirect('/')
   })

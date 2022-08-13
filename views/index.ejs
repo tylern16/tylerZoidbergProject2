@@ -38,7 +38,8 @@
             <% } %>
             </td>
             <td class='days'><%=getNumOfDaysLeft(data[i].dueDate)%></td>
-            <td class='ids'><%=data[i].id%></td>
+            <td><%=data[i].id%></td>
+            <a class='ids' href="/<%=data[i].id%>"></a>
           </tr>
         <% } %>
       </tbody>
@@ -72,20 +73,31 @@
       // myArray.push(nameArray, importanceArray, completedArray, daysArray)
       // console.log(myArray);
 
+      //array of links to show
+      let linksArray = []
+      for (let i = 0; i < nameArray.length; i++) {
+        linksArray.push($('.ids').eq(i).prop('href'))
+      }
+      // console.log(linksArray);
+
+      const makeFirstLetterCap = (string) => {
+        return string.slice(0,1).toUpperCase() + string.slice(1)
+        //.slice[0].toUpperCase() + string.slice(1)
+      }
 
       //create array of objects to build table
       let myArray = []
       for (let i = 0; i < nameArray.length; i++) {
         let object = {
-          name: $('.nameData').eq(i).html(),
+          name: makeFirstLetterCap($('.nameData').eq(i).html()),
           importance: $('.importance').eq(i).html(),
           completed: $('.completed').eq(i).html(),
-          days: $('.days').eq(i).html()
-          myIds: $('.ids').eq(i).html()
+          days: $('.days').eq(i).html(),
+          myLink: $('.ids').eq(i).prop('href')
         }
         myArray.push(object)
       }
-      console.log(myArray);
+      // console.log(myArray);
 
 
       let directionName = 'desc'
@@ -155,7 +167,7 @@
           $tdImportance = $('<td>').addClass('importance').text(data[i].importance).appendTo($row)
           $tdCompleted = $('<td>').addClass('completed').text(data[i].completed).appendTo($row)
           $tdDays = $('<td>').addClass('days').text(data[i].days).appendTo($row)
-          $linkToShow = $('<a>').text(data[i].name).attr('href', '/').appendTo($tdName)
+          $linkToShow = $('<a>').text(data[i].name).attr('href', data[i].myLink).appendTo($tdName)
         }
       }
       buildNewTable(myArray)
