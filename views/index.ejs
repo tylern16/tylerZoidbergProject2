@@ -43,19 +43,6 @@
 
     </table>
     <script>
-      let directionName = 'desc'
-      let directionImportant = 'desc'
-      let directionComplete = 'desc'
-      let directionDays = 'desc'
-      //query table, headers, and rows
-      const $table = $('table')
-      const $tbody = $('tbody')
-
-      const $nameHead = $('.nameHeader')
-      const $importantHead = $('.importanceHeader')
-      const $completeHead = $('.completedHeader')
-      const $daysHead = $('.daysHeader')
-
       //creates an array of data in the name column
       let nameArray = []
       $('.nameData').each((index) => {
@@ -95,37 +82,81 @@
         }
         myArray.push(object)
       }
-      console.log(myArray);
+      // console.log(myArray);
 
 
+      let directionName = 'desc'
+      let directionImportant = 'desc'
+      let directionComplete = 'desc'
+      let directionDays = 'desc'
 
+      const $nameHeader = $('.nameHeader')
+      const $importantHeader = $('.importanceHeader')
+      const $completeHeader = $('.completedHeader')
+      const $daysHeader = $('.daysHeader')
 
-
-
-
-
-
-
-
-      // $name.css('background-color', 'green')
-      //add event listeners
-      $nameHead.on('click', () => {
-        console.log('clicked', directionName)
+      //----------------------1
+      $nameHeader.on('click', () => {
         if (directionName === 'desc') {
+          myArray = _.sortBy(myArray, 'name')
           directionName = 'asc'
-
         } else {
+          myArray = _.sortBy(myArray, 'name').reverse()
           directionName = 'desc'
         }
+        buildNewTable(myArray)
+      })
+      //----------------------2
+      $importantHeader.on('click', () => {
+        if (directionImportant === 'desc') {
+          myArray = _.sortBy(myArray, 'importance')
+          directionImportant = 'asc'
+        } else {
+          myArray = _.sortBy(myArray, 'importance').reverse()
+          directionImportant = 'desc'
+        }
+        buildNewTable(myArray)
+      })
+      //----------------------3
+      $completeHeader.on('click', () => {
+        if (directionComplete === 'desc') {
+          myArray = _.sortBy(myArray, 'completed')
+          directionComplete = 'asc'
+        } else {
+          myArray = _.sortBy(myArray, 'completed').reverse()
+          directionComplete = 'desc'
+        }
+        buildNewTable(myArray)
+      })
+      //----------------------4
+      $daysHeader.on('click', () => {
+        if (directionDays === 'desc') {
+          myArray = _.sortBy(myArray, 'days')
+          directionDays = 'asc'
+        } else {
+          myArray = _.sortBy(myArray, 'days').reverse()
+          directionDays = 'desc'
+        }
+        buildNewTable(myArray)
       })
 
 
 
-      const buildNewTable = (myArray) => {
+      const buildNewTable = (data) => {
+        //remove old new body and replace with new sorted body
         $('tbody').remove()
+        const $tbody = $('<tbody>').appendTo($('table'))
 
-
+        for (let i = 0; i < data.length; i++) {
+          const $row = $('<tr>').appendTo($tbody)
+          $tdName = $('<td>').addClass('nameData').text(data[i].name).appendTo($row)
+          $tdImportance = $('<td>').addClass('importance').text(data[i].importance).appendTo($row)
+          $tdCompleted = $('<td>').addClass('completed').text(data[i].completed).appendTo($row)
+          $tdDays = $('<td>').addClass('days').text(data[i].days).appendTo($row)
+        }
       }
+      buildNewTable(myArray)
+
 
 
     </script>
