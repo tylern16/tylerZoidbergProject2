@@ -13,7 +13,7 @@ const getNumOfDaysLeft = (date2) => {
   // console.log(today);
   let dueDate = new Date(date2).getTime()
   // console.log(dueDate);
-  daysLeft = Math.floor((dueDate - today)/(1000 * 60 * 60 * 24))
+  daysLeft = Math.ceil((dueDate - today)/(1000 * 60 * 60 * 24))
   // console.log(daysLeft);
   return daysLeft
 }

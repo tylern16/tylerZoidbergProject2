@@ -22,7 +22,7 @@
       <tbody>
         <% for (let i = 0; i < data.length; i++) { %>
           <tr>
-            <td><a href="/<%=data[i]._id%>"><%=data[i].name%></a> </td>
+            <td class='nameData'><%=data[i].name%></td>  <!-- TODO: make button to show -->
             <% if (data[i].importance === 'High') { %>
               <td class='importance high'><%=data[i].importance%></td>
             <% } else if (data[i].importance === 'Medium') {%>
@@ -30,14 +30,13 @@
             <% } else {%>
               <td class='importance low'><%=data[i].importance%></td>
             <% } %>
-            <td>
-              <% if (data[i].completed === true) { %>
-                <p>Yes</p>
-              <% } else { %>
-                <p>Not Yet</p>
-              <% } %>
+            <% if (data[i].completed === true) { %>
+              <td class='completed'>Yes</td>
+            <% } else { %>
+              <td class='completed'>Not Yet</td>
+            <% } %>
             </td>
-            <td><%=getNumOfDaysLeft(data[i].dueDate)%></td>
+            <td class='days'><%=getNumOfDaysLeft(data[i].dueDate)%></td>
           </tr>
         <% } %>
       </tbody>
@@ -57,6 +56,53 @@
       const $completeHead = $('.completedHeader')
       const $daysHead = $('.daysHeader')
 
+      //creates an array of data in the name column
+      let nameArray = []
+      $('.nameData').each((index) => {
+        nameArray.push($('.nameData').eq(index).text())
+      })
+      //console.log(nameArray);
+      let importanceArray = []
+      $('.importance').each((index) => {
+        importanceArray.push($('.importance').eq(index).text())
+      })
+      //console.log(importanceArray);
+      let completedArray = []
+      $('.completed').each((index) => {
+        completedArray.push($('.completed').eq(index).html())
+      })
+      // console.log(completedArray);
+      let daysArray = []
+      $('.days').each((index) => {
+        daysArray.push($('.days').eq(index).text())
+      })
+      // console.log(daysArray);
+
+      //array for building the table
+
+      // myArray.push(nameArray, importanceArray, completedArray, daysArray)
+      // console.log(myArray);
+
+
+      //create array of objects to build table
+      let myArray = []
+      for (let i = 0; i < nameArray.length; i++) {
+        let object = {
+          name: $('.nameData').eq(i).html(),
+          importance: $('.importance').eq(i).html(),
+          completed: $('.completed').eq(i).html(),
+          days: $('.days').eq(i).html()
+        }
+        myArray.push(object)
+      }
+      console.log(myArray);
+
+
+
+
+
+
+
 
 
 
@@ -67,10 +113,19 @@
         console.log('clicked', directionName)
         if (directionName === 'desc') {
           directionName = 'asc'
+
         } else {
           directionName = 'desc'
         }
       })
+
+
+
+      const buildNewTable = (myArray) => {
+        $('tbody').remove()
+
+
+      }
 
 
     </script>
