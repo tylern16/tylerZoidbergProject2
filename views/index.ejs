@@ -22,6 +22,7 @@
       <tbody>
         <% for (let i = 0; i < data.length; i++) { %>
           <tr>
+
             <td class='nameData'><%=data[i].name%></td>  <!-- TODO: make button to show -->
             <% if (data[i].importance === 'High') { %>
               <td class='importance high'><%=data[i].importance%></td>
@@ -37,6 +38,7 @@
             <% } %>
             </td>
             <td class='days'><%=getNumOfDaysLeft(data[i].dueDate)%></td>
+            <td class='ids'><%=data[i].id%></td>
           </tr>
         <% } %>
       </tbody>
@@ -79,10 +81,11 @@
           importance: $('.importance').eq(i).html(),
           completed: $('.completed').eq(i).html(),
           days: $('.days').eq(i).html()
+          myIds: $('.ids').eq(i).html()
         }
         myArray.push(object)
       }
-      // console.log(myArray);
+      console.log(myArray);
 
 
       let directionName = 'desc'
@@ -141,7 +144,6 @@
       })
 
 
-
       const buildNewTable = (data) => {
         //remove old new body and replace with new sorted body
         $('tbody').remove()
@@ -149,15 +151,14 @@
 
         for (let i = 0; i < data.length; i++) {
           const $row = $('<tr>').appendTo($tbody)
-          $tdName = $('<td>').addClass('nameData').text(data[i].name).appendTo($row)
+          $tdName = $('<td>').addClass('nameData').appendTo($row)
           $tdImportance = $('<td>').addClass('importance').text(data[i].importance).appendTo($row)
           $tdCompleted = $('<td>').addClass('completed').text(data[i].completed).appendTo($row)
           $tdDays = $('<td>').addClass('days').text(data[i].days).appendTo($row)
+          $linkToShow = $('<a>').text(data[i].name).attr('href', '/').appendTo($tdName)
         }
       }
       buildNewTable(myArray)
-
-
 
     </script>
   </body>
