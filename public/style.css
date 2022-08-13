@@ -7,3 +7,6 @@
 .low {
   background-color: green;
 }
+th {
+  cursor: pointer;
+}

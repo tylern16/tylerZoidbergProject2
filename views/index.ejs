@@ -6,17 +6,17 @@
     <title></title>
   </head>
   <body>
-    <h1>Task Manager</h1>
+    <h1 class='bigT'>Task Manager</h1>
     <form class="" action="/new" method="get">
           <button type="submit" name="New">New</button>
     </form>
     <table>
       <thead>
         <tr class='row-header'>
-          <td>Name</td>
-          <td>Importance</td>
-          <td>Completed?</td>
-          <td>Days Left</td>
+          <th class='nameHeader'>Name</th>
+          <th class='importanceHeader'>Importance</th>
+          <th class='completedHeader'>Completed?</th>
+          <th class='daysHeader'>Days Left</th>
         </tr>
       </thead>
       <tbody>
@@ -44,14 +44,35 @@
 
     </table>
     <script>
-      const changeColor = () => {
-        $('.row-header').on('click', () => {
-          $('.row-header').css('background-color','green')
-        })
-      }
-      $(() => {
-        changeColor()
+      let directionName = 'desc'
+      let directionImportant = 'desc'
+      let directionComplete = 'desc'
+      let directionDays = 'desc'
+      //query table, headers, and rows
+      const $table = $('table')
+      const $tbody = $('tbody')
+
+      const $nameHead = $('.nameHeader')
+      const $importantHead = $('.importanceHeader')
+      const $completeHead = $('.completedHeader')
+      const $daysHead = $('.daysHeader')
+
+
+
+
+
+      // $name.css('background-color', 'green')
+      //add event listeners
+      $nameHead.on('click', () => {
+        console.log('clicked', directionName)
+        if (directionName === 'desc') {
+          directionName = 'asc'
+        } else {
+          directionName = 'desc'
+        }
       })
+
+
     </script>
   </body>
 </html>

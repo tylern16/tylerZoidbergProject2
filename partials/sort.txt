@@ -1,0 +1,17 @@
+const changeColor = () => {
+  $('.row-header').on('click', () => {
+    $('.row-header').css('background-color','green')
+  })
+}
+$(() => {
+  changeColor()
+})
+
+const changeColor = () => {
+  $('.bigT').on('click', () => {
+    $('.bigT').css('background-color', 'green')
+  })
+}
+changeColor()
+
+https://www.youtube.com/watch?v=Q9aYU1Ufkpk
