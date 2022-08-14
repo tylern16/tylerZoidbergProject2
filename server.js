@@ -8,6 +8,7 @@ const app = express ();
 const db = mongoose.connection;
 require('dotenv').config()
 const tasksController = require('./controllers/tasks.js')
+const engineerController = require('./controllers/engineer.js')
 
 //___________________
 //Port
@@ -47,6 +48,7 @@ app.use(methodOverride('_method'));// allow POST, PUT and DELETE from a form
 
 //controller file
 app.use(tasksController)
+app.use(engineerController)
 
 
 //___________________

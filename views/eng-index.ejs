@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Eng</h1>
+    <a href="/engineers/new">Add New Engineer</a> <br>
+    <ul>
+      <% for (let i = 0; i < data.length; i++) { %>
+        <li><a href="/engineers/<%=data[i].id%>"><%=data[i].name%></a><br></li>
+      <% } %>
+    </ul>
+  </body>
+</html>

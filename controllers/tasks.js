@@ -83,14 +83,13 @@ router.put('/:id', (req, res)=>{
   } else {
     req.body.completed = false
   }
-
   Tasks.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, newTask)=>{
       res.redirect('/')
   })
 })
 
 //show  route
-router.get('/:id', (req, res) => {
+router.get('/home/:id', (req, res) => {
   Tasks.findById(req.params.id, (err, foundTask) => {
     res.render(
       'show.ejs',

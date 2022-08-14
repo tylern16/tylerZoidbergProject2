@@ -7,6 +7,7 @@
   </head>
   <body>
     <h1 class='bigT'>Task Manager</h1>
+    <a href="/engineers">Show All Engineers</a>
     <form class="" action="/new" method="get">
           <button type="submit" name="New">New</button>
     </form>
@@ -40,7 +41,7 @@
             <td class='days'><%=getNumOfDaysLeft(data[i].dueDate)%></td>
             <td><%=data[i].id%></td>
             <td class='color'><%=data[i].color%></td>
-            <a class='ids' href="/<%=data[i].id%>"></a>
+            <a class='ids' href="/home/<%=data[i].id%>"></a>
           </tr>
         <% } %>
       </tbody>
