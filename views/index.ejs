@@ -14,7 +14,7 @@
       <thead>
         <tr class='row-header'>
           <th class='nameHeader'>Name</th>
-          <th class='importanceHeader'>Importance</th>
+          <th class='importanceHeader'>Priority</th>
           <th class='completedHeader'>Completed?</th>
           <th class='daysHeader'>Days Left</th>
         </tr>
@@ -23,10 +23,10 @@
         <% for (let i = 0; i < data.length; i++) { %>
           <tr>
 
-            <td class='nameData'><%=data[i].name%></td>  <!-- TODO: make button to show -->
-            <% if (data[i].importance === 'High') { %>
+            <td class='nameData'><%=data[i].name%></td>
+            <% if (data[i].importance === 'Top') { %>
               <td class='importance high'><%=data[i].importance%></td>
-            <% } else if (data[i].importance === 'Medium') {%>
+            <% } else if (data[i].importance === 'Moderate') {%>
               <td class='importance medium'><%=data[i].importance%></td>
             <% } else {%>
               <td class='importance low'><%=data[i].importance%></td>
@@ -39,6 +39,7 @@
             </td>
             <td class='days'><%=getNumOfDaysLeft(data[i].dueDate)%></td>
             <td><%=data[i].id%></td>
+            <td class='color'><%=data[i].color%></td>
             <a class='ids' href="/<%=data[i].id%>"></a>
           </tr>
         <% } %>
@@ -47,37 +48,35 @@
     </table>
     <script>
       //creates an array of data in the name column
+      //USED FOR LENGTH OF LOOPS
       let nameArray = []
       $('.nameData').each((index) => {
         nameArray.push($('.nameData').eq(index).text())
       })
       //console.log(nameArray);
-      let importanceArray = []
-      $('.importance').each((index) => {
-        importanceArray.push($('.importance').eq(index).text())
-      })
+      // let importanceArray = []
+      // $('.importance').each((index) => {
+      //   importanceArray.push($('.importance').eq(index).text())
+      // })
       //console.log(importanceArray);
-      let completedArray = []
-      $('.completed').each((index) => {
-        completedArray.push($('.completed').eq(index).html())
-      })
+      // let completedArray = []
+      // $('.completed').each((index) => {
+      //   completedArray.push($('.completed').eq(index).html())
+      // })
       // console.log(completedArray);
-      let daysArray = []
-      $('.days').each((index) => {
-        daysArray.push($('.days').eq(index).text())
-      })
+      // let daysArray = []
+      // $('.days').each((index) => {
+      //   daysArray.push($('.days').eq(index).text())
+      // })
       // console.log(daysArray);
-
       //array for building the table
-
       // myArray.push(nameArray, importanceArray, completedArray, daysArray)
       // console.log(myArray);
-
       //array of links to show
-      let linksArray = []
-      for (let i = 0; i < nameArray.length; i++) {
-        linksArray.push($('.ids').eq(i).prop('href'))
-      }
+      // let linksArray = []
+      // for (let i = 0; i < nameArray.length; i++) {
+      //   linksArray.push($('.ids').eq(i).prop('href'))
+      // }
       // console.log(linksArray);
 
       const makeFirstLetterCap = (string) => {
@@ -92,17 +91,18 @@
           name: makeFirstLetterCap($('.nameData').eq(i).html()),
           importance: $('.importance').eq(i).html(),
           completed: $('.completed').eq(i).html(),
-          days: $('.days').eq(i).html(),
-          myLink: $('.ids').eq(i).prop('href')
+          days: Number($('.days').eq(i).html()),
+          myLink: $('.ids').eq(i).prop('href'),
+          color: $('.color').eq(i).html()
         }
         myArray.push(object)
       }
-      // console.log(myArray);
+      console.log(myArray);
 
 
       let directionName = 'desc'
-      let directionImportant = 'desc'
-      let directionComplete = 'desc'
+      let directionImportant = 'asc'
+      let directionComplete = 'asc'
       let directionDays = 'desc'
 
       const $nameHeader = $('.nameHeader')
@@ -162,7 +162,7 @@
         const $tbody = $('<tbody>').appendTo($('table'))
 
         for (let i = 0; i < data.length; i++) {
-          const $row = $('<tr>').appendTo($tbody)
+          const $row = $('<tr>').appendTo($tbody).css('background-color', `${data[i].color}`)
           $tdName = $('<td>').addClass('nameData').appendTo($row)
           $tdImportance = $('<td>').addClass('importance').text(data[i].importance).appendTo($row)
           $tdCompleted = $('<td>').addClass('completed').text(data[i].completed).appendTo($row)

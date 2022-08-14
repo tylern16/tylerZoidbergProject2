@@ -7,7 +7,8 @@ const taskSchema = new mongoose.Schema({
   description: String,
   importance: {type: String, required: true},
   team: String,
-  completed: Boolean
+  completed: Boolean,
+  color: String
 })
 
 const Task = mongoose.model('Task', taskSchema)//Task has to be capitalized

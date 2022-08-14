@@ -8,6 +8,7 @@
     <a href="/">Back</a><br>
     <h1> <%=task.name%> </h1>
     Importance: <p><%=task.importance%></p>
+    <p style="background-color:<%=task.color%>;">Color </p>
     Due Date: <p><%=task.dueDate%></p>
     Days Left: <p><%=getNumOfDaysLeft(task.dueDate)%></p>
     Description: <p><%=task.description%></p>
