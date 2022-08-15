@@ -50,10 +50,7 @@ app.use(methodOverride('_method'));// allow POST, PUT and DELETE from a form
 app.use(tasksController)
 app.use(engineerController)
 
-//redirect
-app.get('/', (req, res) => {
-  res.redirect('/home')
-})
+
 //___________________
 //Listener
 //___________________
