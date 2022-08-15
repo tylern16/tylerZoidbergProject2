@@ -17,7 +17,7 @@ router.get('/engineers' , (req, res) => {
     res.render(
       'eng-index.ejs',
       {
-        data: found,
+        data: found
       }
     )
   })

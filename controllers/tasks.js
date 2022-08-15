@@ -26,6 +26,16 @@ const changeColor =  () => {
   }
 }
 
+// //auth
+// const isAuthenticated = (req, res, next) => {
+//   if (req.session.currentUser) {
+//     return next()
+//   } else {
+//     res.redirect('/sessions/new')
+//   }
+// }
+
+
 //select td
 //if td if high set background color to red
 // const showImportanceColor = () => {
@@ -33,12 +43,12 @@ const changeColor =  () => {
 //   console.log(element);
 // }
 // showImportanceColor()
-
+//another question, when I try to login or signup, or get any page that has currentUser,  I get an error saying currentUser is undefined, as it should be, because I can’t login becuase I can’t render /users/new or /session/new  without currentUser which is where I define the value of req.session.currentUser , it makes more sense to me to not have currentUser in get routes for sessions and user
 //___________________
 // Routes
 //___________________
 //index route
-router.get('/home' , (req, res) => {
+router.get('/home', (req, res) => {
   Tasks.find({}, (err, foundTasks) => {
     res.render(
       'index.ejs',

@@ -6,9 +6,12 @@ const methodOverride  = require('method-override');
 const mongoose = require ('mongoose');
 const app = express ();
 const db = mongoose.connection;
+// const session = require('express-session')
 require('dotenv').config()
 const tasksController = require('./controllers/tasks.js')
 const engineerController = require('./controllers/engineer.js')
+// const userController = require('./controllers/users.js')
+// const sessionsController = require('./controllers/sessions.js')
 
 //___________________
 //Port
@@ -46,9 +49,26 @@ app.use(express.json());// returns middleware that only parses JSON - may or may
 //use method override
 app.use(methodOverride('_method'));// allow POST, PUT and DELETE from a form
 
-//controller file
+//controller file------------------------can set up /home and '/'
 app.use(tasksController)
 app.use(engineerController)
+// app.use('/users', userController)
+// app.use('/sessions', sessionsController)
+
+//use session
+// app.use(
+//   session({
+//     secret: process.env.SECRET, //a random string do not copy this value or your stuff will get hacked
+//     resave: false, // default more info: https://www.npmjs.com/package/express-session#resave
+//     saveUninitialized: false // default  more info: https://www.npmjs.com/package/express-session#resave
+//   })
+// )
+
+
+app.get('/', (req, res) => {
+  res.redirect('/home')
+})
+
 
 
 //___________________
