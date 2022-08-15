@@ -6,8 +6,14 @@
   </head>
   <body>
     <h1>New Task</h1>
-    <form action="/" method="POST">
-      Name*: <input type="text" name="name" value="" placeholder="Name" required><br>
+    <form action="/home" method="POST">
+      Task Name*: <input type="text" name="name" value="" placeholder="Name" required><br>
+      Assign to: <select  name="engineerId"><br>
+        <% for (let i = 0; i < data.length; i++) { %>
+          <% console.log(data[i]._id) %>
+          <option value="<%=data[i]._id%>"><%=data[i].name%></option>
+        <% } %>
+      </select><br>
       Due Date*: <input type="date" name="dueDate" value="" required><br>
       Importance:
       <div class="radio-container">
@@ -15,9 +21,8 @@
         <input type="radio" id="importanceChoice2" name="importance" value="Moderate" checked>Moderate
         <input type="radio" id="importanceChoice3" name="importance" value="Low">Low
       </div>
-      Color: <input type="color" name="color" value=""><br>
+      Color: <input type="color" name="color" value="#ffffff"><br>
       Descripition: <textarea rows="5" cols="60" name="description" placeholder="enter detail here..."></textarea><br>
-      Team Members(optional): <textarea rows="3" cols="60" name="team" placeholder="enter team members here..."></textarea><br>
       <input type="checkbox" name="completed" hidden><br>
       <input type="submit" value="Create">
     </form>

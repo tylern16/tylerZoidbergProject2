@@ -6,6 +6,14 @@
   </head>
   <body>
     <h1><%=data.name%></h1>
+    <ul>
+      <% for (let i = 0; i < data.tasks.length; i++) { %>
+        <li><a href="/home/<%=data.tasks[i].id%>"><%=data.tasks[i].name%></a></li>
+      <% } %>
+    </ul>
+
+
+    <a href="/engineers">Back</a><br>
     <a href="/engineers/<%=data.id%>/edit">EDIT</a><br>
     <form action="/engineer/<%=data.id%>?_method=DELETE" method="post">
       <input type="submit" name="" value="DELETE">

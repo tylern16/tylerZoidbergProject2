@@ -6,9 +6,21 @@
   </head>
   <body>
     <h1>Edit</h1>
-    <a href="/<%=task.id%>">Back</a>
-    <form  action="/<%=task.id%>?_method=PUT" method="POST">
+    <a href="/home/<%=task.id%>">Back</a>
+    <form  action="/home/<%=task.id%>?_method=PUT" method="POST">
       Name: <input type="text" name="name" value="<%=task.name%>" ><br>
+      Engineer: <select name="engineerId">
+        <% for (let i = 0; i < engineers.length; i++) { %>
+          <option
+            value="<%=engineers[i]._id%>"
+            <% if (engineers[i]._id.toString() === taskEngineer._id.toString()) { %>
+              selected
+            <% } %>
+            >
+            <%=engineers[i].name%>
+          </option>
+        <% } %>
+      </select><br>
       Due Date: <input type="date" name="dueDate" value="<%=task.dueDate%>"><br>
       Importance:
       <div class="radio-container">

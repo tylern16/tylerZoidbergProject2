@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const Engineer = require('../models/engineerSchema.js')
+const Tasks = require('../models/taskSchema.js')
 
 //seed route
 // router.get('/engineers/seed', (req, res) => {
@@ -69,9 +70,23 @@ router.get('/engineers/:id', (req, res) => {
   })
 })
 
+//delete route
 router.delete('/engineer/:id', (req, res) => {
-  Engineer.findByIdAndRemove(req.params.id, (err, deletedItem) => {
-    res.redirect('/engineers')
+  Engineer.findByIdAndRemove(req.params.id, (err, foundEng) => {
+    const taskIds = []
+    for (let i = 0; i < foundEng.tasks.length; i++) {
+      taskIds.push(foundEng.tasks[i]._id)
+    }
+    Tasks.remove(
+      {
+        _id: {
+          $in: taskIds
+        }
+      },
+      (err, data) => {
+        res.redirect('/engineers')
+      }
+    )
   })
 })
 

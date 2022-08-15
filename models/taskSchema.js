@@ -6,7 +6,6 @@ const taskSchema = new mongoose.Schema({
   dueDate: {type: String, required: true},
   description: String,
   importance: {type: String, required: true},
-  team: String,
   completed: Boolean,
   color: String
 })
