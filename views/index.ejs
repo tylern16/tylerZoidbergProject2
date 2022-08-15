@@ -6,18 +6,17 @@
     <title></title>
   </head>
   <body>
-    <h1 class='bigT'>Task Manager</h1>
-    <a href="/engineers">Show All Engineers</a>
-    <form class="" action="/home/new" method="get">
-          <button type="submit" name="New">New</button>
-    </form>
-    <table>
+    <%- include ('../partials/navbar.ejs') %>
+    <div class="container title-div">
+      <h1 class='title'>Project Manager</h1>
+    </div>
+    <table class='table table-bordered border-dark'>
       <thead>
         <tr class='row-header'>
-          <th class='nameHeader'>Name</th>
-          <th class='importanceHeader'>Priority</th>
-          <th class='completedHeader'>Completed?</th>
-          <th class='daysHeader'>Days Left</th>
+          <th class='nameHeader'>Project Name<i class="bi bi-chevron-down name-sort"></i></th>
+          <th class='importanceHeader'>Priority<i class="bi bi-chevron-down importance-sort"></i></th>
+          <th class='completedHeader'>Completed?<i class="bi bi-chevron-down comp-sort"></i></th>
+          <th class='daysHeader'>Days Left<i class="bi bi-chevron-down days-sort"></i></th>
         </tr>
       </thead>
       <tbody>
@@ -35,7 +34,7 @@
             <% if (data[i].completed === true) { %>
               <td class='completed'>Yes</td>
             <% } else { %>
-              <td class='completed'>Not Yet</td>
+              <td class='completed'>No</td>
             <% } %>
             </td>
             <td class='days'><%=getNumOfDaysLeft(data[i].dueDate)%></td>
@@ -47,6 +46,7 @@
       </tbody>
 
     </table>
+    <%- include ('../partials/footer.ejs') %>
     <script>
       //creates an array of data in the name column
       //USED FOR LENGTH OF LOOPS
@@ -116,9 +116,13 @@
         if (directionName === 'desc') {
           myArray = _.sortBy(myArray, 'name')
           directionName = 'asc'
+          $('.name-sort').remove()
+          $('<i>').addClass('bi bi-chevron-down name-sort').appendTo($nameHeader)
         } else {
           myArray = _.sortBy(myArray, 'name').reverse()
           directionName = 'desc'
+          $('.name-sort').remove()
+          $('<i>').addClass('bi bi-chevron-up name-sort').appendTo($nameHeader)
         }
         buildNewTable(myArray)
       })
@@ -127,9 +131,13 @@
         if (directionImportant === 'desc') {
           myArray = _.sortBy(myArray, 'importance')
           directionImportant = 'asc'
+          $('.importance-sort').remove()
+          $('<i>').addClass('bi bi-chevron-up importance-sort').appendTo($importantHeader)
         } else {
           myArray = _.sortBy(myArray, 'importance').reverse()
           directionImportant = 'desc'
+          $('.importance-sort').remove()
+          $('<i>').addClass('bi bi-chevron-down importance-sort').appendTo($importantHeader)
         }
         buildNewTable(myArray)
       })
@@ -138,9 +146,13 @@
         if (directionComplete === 'desc') {
           myArray = _.sortBy(myArray, 'completed')
           directionComplete = 'asc'
+          $('.comp-sort').remove()
+          $('<i>').addClass('bi bi-chevron-down comp-sort').appendTo($completeHeader)
         } else {
           myArray = _.sortBy(myArray, 'completed').reverse()
           directionComplete = 'desc'
+          $('.comp-sort').remove()
+          $('<i>').addClass('bi bi-chevron-up comp-sort').appendTo($completeHeader)
         }
         buildNewTable(myArray)
       })
@@ -149,9 +161,13 @@
         if (directionDays === 'desc') {
           myArray = _.sortBy(myArray, 'days')
           directionDays = 'asc'
+          $('.days-sort').remove()
+          $('<i>').addClass('bi bi-chevron-down days-sort').appendTo($daysHeader)
         } else {
           myArray = _.sortBy(myArray, 'days').reverse()
           directionDays = 'desc'
+          $('.days-sort').remove()
+          $('<i>').addClass('bi bi-chevron-up days-sort').appendTo($daysHeader)
         }
         buildNewTable(myArray)
       })

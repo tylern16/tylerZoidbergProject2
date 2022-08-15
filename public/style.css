@@ -1,12 +1,39 @@
-.high {
-  background-color: red;
+body{
+  text-align: center;
 }
-.medium {
-  background-color: yellow;
+.navbar {
+  background-color: #8cb4f5;
 }
-.low {
-  background-color: green;
+nav > a {
+  font-size: 1.5em;
+  color: white;
 }
+.title {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 4.5vw;
+  padding: 2em;
+}
+.table {
+  width: 90%;
+  margin: 0 auto;
+}
+
+
 th {
   cursor: pointer;
+}
+
+footer {
+  width: 100%;
+  padding: 1em;
+  margin-top: 2em;
+}
+.footer-a {
+  color: grey;
+}
+
+@media query {
+  .title {
+
+  }
 }

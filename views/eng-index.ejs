@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+    <%- include ('../partials/head.ejs') %>
     <meta charset="utf-8">
     <title></title>
   </head>
   <body>
+    <%- include ('../partials/navbar.ejs') %>
     <h1>Eng</h1>
     <a href="/home">Back</a><br>
     <a href="/engineers/new">Add New Engineer</a> <br>
@@ -13,5 +15,6 @@
         <li><a href="/engineers/<%=data[i].id%>"><%=data[i].name%></a><br></li>
       <% } %>
     </ul>
+    <%- include ('../partials/footer.ejs') %>
   </body>
 </html>

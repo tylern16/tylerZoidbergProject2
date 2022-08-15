@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+    <%- include ('../partials/head.ejs') %>
     <meta charset="utf-8">
     <title></title>
   </head>
   <body>
+    <%- include ('../partials/navbar.ejs') %>
     <h1><%=data.name%></h1>
     <ul>
       <% for (let i = 0; i < data.tasks.length; i++) { %>
@@ -18,5 +20,6 @@
     <form action="/engineer/<%=data.id%>?_method=DELETE" method="post">
       <input type="submit" name="" value="DELETE">
     </form>
+    <%- include ('../partials/footer.ejs') %>
   </body>
 </html>

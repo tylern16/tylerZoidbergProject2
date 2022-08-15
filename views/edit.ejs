@@ -5,6 +5,7 @@
     <title></title>
   </head>
   <body>
+    <%- include ('../partials/navbar.ejs') %>
     <h1>Edit</h1>
     <a href="/home/<%=task.id%>">Back</a>
     <form  action="/home/<%=task.id%>?_method=PUT" method="POST">
@@ -33,5 +34,6 @@
       Completed: <input type="checkbox" name="completed"  ><br>
       <input type="submit" value="Confirm">
     </form>
+    <%- include ('../partials/footer.ejs') %>
   </body>
 </html>

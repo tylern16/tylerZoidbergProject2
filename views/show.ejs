@@ -5,6 +5,7 @@
     <title></title>
   </head>
   <body>
+    <%- include ('../partials/navbar.ejs') %>
     <a href="/home">Back</a><br>
     <h1> <%=task.name%></h1>
     Engineer: <p><%=engineer.name%></p><br>
@@ -18,5 +19,6 @@
     <form action="/home/<%=task.id%>?_method=DELETE" method="POST">
       <input type="Submit" value="Delete"/>
     </form>
+    <%- include ('../partials/footer.ejs') %>
   </body>
 </html>
