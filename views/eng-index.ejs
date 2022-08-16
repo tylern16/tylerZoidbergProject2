@@ -7,14 +7,26 @@
   </head>
   <body>
     <%- include ('../partials/navbar.ejs') %>
-    <h1>Eng</h1>
-    <a href="/home">Back</a><br>
-    <a href="/engineers/new">Add New Engineer</a> <br>
-    <ul>
-      <% for (let i = 0; i < data.length; i++) { %>
-        <li><a href="/engineers/<%=data[i].id%>"><%=data[i].name%></a><br></li>
-      <% } %>
-    </ul>
+    <h1 class="title">Engineers</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th># of Assigned Projects</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (let i = 0; i < data.length; i++) { %>
+          <tr class='row<%=i%>'>
+            <td><a href="/engineers/<%=data[i].id%>"><%=data[i].name%></a></td>
+            <td><%=data[i].tasks.length%></td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+    <form class="new-eng-button" action="/engineers/new" method="get">
+      <button type="submit" class="btn btn-success" name="button">Add New Engineer</button>
+    </form>
     <%- include ('../partials/footer.ejs') %>
   </body>
 </html>
