@@ -4,12 +4,14 @@ body{
 /* partials */
 .navbar {
   background-color: #8cb4f5;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,.2);
 }
 nav > a {
   font-size: 1.5em;
   color: white;
 }
 footer {
+  height: 10%;
   width: 100%;
   padding: 1em;
   margin-top: 2em;
@@ -46,4 +48,15 @@ th {
 }
 #show-flex-container {
   padding-bottom: 1.5em;
+}
+/* edit page */
+.edit-container {
+  width: 80%;
+  margin: 0 auto;
+}
+.edit-flex-item {
+  padding: 0.5em;
+}
+.description-label {
+  margin-bottom: 0;
 }

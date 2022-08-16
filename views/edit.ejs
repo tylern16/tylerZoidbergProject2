@@ -6,33 +6,51 @@
   </head>
   <body>
     <%- include ('../partials/navbar.ejs') %>
-    <h1>Edit</h1>
-    <a href="/home/<%=task.id%>">Back</a>
+    <h1 class="show-title">Edit <%=task.name%></h1>
     <form  action="/home/<%=task.id%>?_method=PUT" method="POST">
-      Name: <input type="text" name="name" value="<%=task.name%>" ><br>
-      Engineer: <select name="engineerId">
-        <% for (let i = 0; i < engineers.length; i++) { %>
-          <option
-            value="<%=engineers[i]._id%>"
-            <% if (engineers[i]._id.toString() === taskEngineer._id.toString()) { %>
-              selected
+      <div class="d-flex flex-column align-items-start edit-container">
+        <div class="edit-flex-item">
+          Name: <input type="text" name="name" value="<%=task.name%>" ><br>
+        </div>
+        <div class="edit-flex-item">
+          Engineer: <select name="engineerId">
+            <% for (let i = 0; i < engineers.length; i++) { %>
+              <option
+                value="<%=engineers[i]._id%>"
+                <% if (engineers[i]._id.toString() === taskEngineer._id.toString()) { %>
+                  selected
+                <% } %>
+                >
+                <%=engineers[i].name%>
+              </option>
             <% } %>
-            >
-            <%=engineers[i].name%>
-          </option>
-        <% } %>
-      </select><br>
-      Due Date: <input type="date" name="dueDate" value="<%=task.dueDate%>"><br>
-      Importance:
-      <div class="radio-container">
-        <input type="radio" id="importanceChoice1" name="importance" value="Top" <% if(task.importance === 'High') { %> checked <% } %> >Top
-        <input type="radio" id="importanceChoice2" name="importance" value="Moderate" <% if(task.importance === 'Medium') { %> checked <% } %>>Moderate
-        <input type="radio" id="importanceChoice3" name="importance" value="Low" <% if(task.importance === 'Low') { %> checked <% } %>>Low
+          </select><br>
+        </div>
+        <div class="edit-flex-item">
+          Due Date: <input type="date" name="dueDate" value="<%=task.dueDate%>"><br>
+        </div>
+        <div class="edit-flex-item">
+          Color: <input type="color" name="color" value="<%=task.color%>"><br>
+        </div>
+        <div class="edit-flex-item">
+          <div class="radio-container">
+            Importance:
+            <input type="radio" id="importanceChoice1" name="importance" value="Top" <% if(task.importance === 'Top') { %> checked <% } %> >Top
+            <input type="radio" id="importanceChoice2" name="importance" value="Moderate" <% if(task.importance === 'Moderate') { %> checked <% } %>>Moderate
+            <input type="radio" id="importanceChoice3" name="importance" value="Low" <% if(task.importance === 'Low') { %> checked <% } %>>Low
+          </div>
+        </div>
+        <div class="d-flex flex-column align-items-start edit-flex-item">
+          <p class="description-label">Description: </p>
+          <textarea rows="2" cols="50" name="description" ><%=task.description%></textarea><br>
+        </div>
+        <div class="edit-flex-item">
+          Completed: <input type="checkbox" name="completed"  ><br>
+        </div>
+        <div class="edit-flex-item">
+          <button type="submit" class="btn btn-success">Submit Changes</button>
+        </div>
       </div>
-      Color: <input type="color" name="color" value="<%=task.color%>"><br>
-      Description: <textarea rows="5" cols="60" name="description" ><%=task.description%></textarea><br>
-      Completed: <input type="checkbox" name="completed"  ><br>
-      <input type="submit" value="Confirm">
     </form>
     <%- include ('../partials/footer.ejs') %>
   </body>
