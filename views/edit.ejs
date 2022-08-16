@@ -45,7 +45,12 @@
           <textarea rows="2" cols="50" name="description" ><%=task.description%></textarea><br>
         </div>
         <div class="edit-flex-item">
-          Completed: <input type="checkbox" name="completed"  ><br>
+          Completed:
+          <% if (task.completed === true) { %>
+            <input type="checkbox" name="completed" checked ><br>
+          <% } else { %>
+            <input type="checkbox" name="completed"  ><br>
+          <% } %>
         </div>
         <div class="edit-flex-item">
           <button type="submit" class="btn btn-success">Submit Changes</button>

@@ -6,26 +6,43 @@
   </head>
   <body>
     <%- include ('../partials/navbar.ejs') %>
-    <h1>New Task</h1>
+    <h1 class="show-title">New Project</h1>
     <form action="/home" method="POST">
-      Task Name*: <input type="text" name="name" value="" placeholder="Name" required><br>
-      Assign to: <select  name="engineerId"><br>
-        <% for (let i = 0; i < data.length; i++) { %>
-          <% console.log(data[i]._id) %>
-          <option value="<%=data[i]._id%>"><%=data[i].name%></option>
-        <% } %>
-      </select><br>
-      Due Date*: <input type="date" name="dueDate" value="" required><br>
-      Importance:
-      <div class="radio-container">
-        <input type="radio" id="importanceChoice1" name="importance" value="Top">Top
-        <input type="radio" id="importanceChoice2" name="importance" value="Moderate" checked>Moderate
-        <input type="radio" id="importanceChoice3" name="importance" value="Low">Low
+      <div class="d-flex flex-column align-items-start edit-container">
+        <div class="edit-flex-item">
+          Task Name: <input type="text" name="name" value="" placeholder="Name" required><br>
+
+        </div>
+        <div class="edit-flex-item">
+          Assign to: <select  name="engineerId"><br>
+            <% for (let i = 0; i < data.length; i++) { %>
+              <% console.log(data[i]._id) %>
+              <option value="<%=data[i]._id%>"><%=data[i].name%></option>
+            <% } %>
+          </select><br>
+        </div>
+        <div class="edit-flex-item">
+          Due Date: <input type="date" name="dueDate" value="" required><br>
+        </div>
+        <div class="edit-flex-item">
+          <div class="radio-container">
+            Importance:
+            <input type="radio" id="importanceChoice1" name="importance" value="Top">Top
+            <input type="radio" id="importanceChoice2" name="importance" value="Moderate" checked>Moderate
+            <input type="radio" id="importanceChoice3" name="importance" value="Low">Low
+          </div>
+        </div>
+        <div class="edit-flex-item">
+          Color: <input type="color" name="color" value="#ffffff"><br>
+        </div>
+        <div class="d-flex flex-column align-items-start edit-flex-item">
+          Descripition: <textarea rows="5" cols="60" name="description" placeholder="enter detail here..."></textarea><br>
+        </div>
+        <div class="edit-flex-item">
+          <button type="submit" name="button" class="btn btn-success">Create New Project</button>
+        </div>
+        <input type="checkbox" name="completed" hidden><br>
       </div>
-      Color: <input type="color" name="color" value="#ffffff"><br>
-      Descripition: <textarea rows="5" cols="60" name="description" placeholder="enter detail here..."></textarea><br>
-      <input type="checkbox" name="completed" hidden><br>
-      <input type="submit" value="Create">
     </form>
     <%- include ('../partials/footer.ejs') %>
   </body>
