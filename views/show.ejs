@@ -6,19 +6,43 @@
   </head>
   <body>
     <%- include ('../partials/navbar.ejs') %>
-    <a href="/home">Back</a><br>
-    <h1> <%=task.name%></h1>
-    Engineer: <p><%=engineer.name%></p><br>
-    Importance: <p><%=task.importance%></p>
-    <p style="background-color:<%=task.color%>;">Color </p>
-    Due Date: <p><%=task.dueDate%></p>
-    Days Left: <p><%=getNumOfDaysLeft(task.dueDate)%></p>
-    Description: <p><%=task.description%></p>
-    Completed: <p><%=task.completed%></p>
-    <a href="/home/<%=task.id%>/edit">Edit</a>
-    <form action="/home/<%=task.id%>?_method=DELETE" method="POST">
-      <input type="Submit" value="Delete"/>
-    </form>
+    <h1 class="show-title"> <%=task.name%></h1>
+    <div id='show-flex-container' class="d-flex flex-column">
+      <div class="show-flex-item">
+        Engineer: <%=engineer.name%>
+      </div>
+      <div class="show-flex-item">
+        Importance: <%=task.importance%>
+      </div>
+      <div class="show-flex-item">
+        Color: <div class='color' style="background-color:<%=task.color%>;"></div>
+      </div>
+      <div class="show-flex-item">
+        Due Date: <%=task.dueDate%>
+      </div>
+      <div class="show-flex-item">
+        Days Left: <%=getNumOfDaysLeft(task.dueDate)%>
+      </div>
+      <div class="show-flex-item">
+        Description: <%=task.description%>
+      </div>
+      <div class="show-flex-item">
+        Completed:
+        <% if (task.completed) { %>
+          Yes
+        <% } else { %>
+          No
+        <% } %>
+      </div>
+    </div>
+    <div class="d-flex justify-content-around">
+      <form class="show-button" action="/home/<%=task.id%>/edit" method="get">
+        <button type="submit" class="btn btn-outline-primary" >Edit</button>
+      </form>
+      <form class="show-button" action="/home/<%=task.id%>?_method=DELETE" method="POST">
+        <button type="button" class="btn btn-danger">Delete</button>
+      </form>
+    </div>
     <%- include ('../partials/footer.ejs') %>
   </body>
 </html>

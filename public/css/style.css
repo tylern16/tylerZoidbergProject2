@@ -1,0 +1,49 @@
+body{
+  text-align: center;
+}
+/* partials */
+.navbar {
+  background-color: #8cb4f5;
+}
+nav > a {
+  font-size: 1.5em;
+  color: white;
+}
+footer {
+  width: 100%;
+  padding: 1em;
+  margin-top: 2em;
+}
+.footer-a {
+  color: grey;
+}
+/* style index */
+.title {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 4.5vw;
+  padding: 2em;
+}
+.table {
+  width: 90%;
+  margin: 0 auto;
+}
+th {
+  cursor: pointer;
+}
+/* show route */
+.show-title {
+  font-size: 7vw;
+  margin: 0.5em auto;
+}
+.color {
+  height: 1em;
+  width: 1em;
+  display: inline-block;
+  border-radius: 100%;
+}
+.show-flex-item {
+  font-size: 4vw;
+}
+#show-flex-container {
+  padding-bottom: 1.5em;
+}

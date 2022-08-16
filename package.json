@@ -22,6 +22,7 @@
   "homepage": "https://github.com/tylern16/tylerZoidbergProject2#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "bootstrap": "^5.2.0",
     "bootstrap-icons": "^1.9.1",
     "dotenv": "^16.0.1",
     "ejs": "^3.1.8",
