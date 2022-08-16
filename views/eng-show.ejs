@@ -7,19 +7,39 @@
   </head>
   <body>
     <%- include ('../partials/navbar.ejs') %>
-    <h1><%=data.name%></h1>
-    <ul>
-      <% for (let i = 0; i < data.tasks.length; i++) { %>
-        <li><a href="/home/<%=data.tasks[i].id%>"><%=data.tasks[i].name%></a></li>
-      <% } %>
-    </ul>
-
-
-    <a href="/engineers">Back</a><br>
-    <a href="/engineers/<%=data.id%>/edit">EDIT</a><br>
-    <form action="/engineer/<%=data.id%>?_method=DELETE" method="post">
-      <input type="submit" name="" value="DELETE">
-    </form>
+    <h1 class="show-title"><%=data.name%></h1>
+    <table class='table'>
+      <thead>
+        <tr>
+          <td>Tasks</td>
+          <td>Days Left</td>
+          <td>Importance</td>
+          <td>Completed</td>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (let i = 0; i < data.tasks.length; i++) { %>
+          <tr>
+            <td><a href="/home/<%=data.tasks[i].id%>"><%=data.tasks[i].name%></a></td>
+            <td><%=getNumOfDaysLeft(data.tasks[i].dueDate)%></td>
+            <td><%=data.tasks[i].importance%></td>
+            <% if (data.tasks[i].completed) { %>
+              <td>Yes</td>
+            <% } else { %>
+              <td>No</td>
+            <% } %>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+    <div class="d-flex justify-content-around eng-show-container">
+      <form class="" action="/engineers/<%=data.id%>/edit" method="get">
+        <button type="submit" class="btn btn-outline-primary">Change Engineer Name</button>
+      </form>
+      <form action="/engineer/<%=data.id%>?_method=DELETE" method="post">
+        <button type="submit" class="btn btn-danger">Delete</button>
+      </form>
+    </div>
     <%- include ('../partials/footer.ejs') %>
   </body>
 </html>

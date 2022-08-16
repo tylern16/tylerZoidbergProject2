@@ -11,6 +11,16 @@ const Tasks = require('../models/taskSchema.js')
 //   })
 // })
 
+const getNumOfDaysLeft = (date2) => {
+  let today = new Date().getTime()
+  // console.log(today);
+  let dueDate = new Date(date2).getTime()
+  // console.log(dueDate);
+  daysLeft = Math.ceil((dueDate - today)/(1000 * 60 * 60 * 24))
+  // console.log(daysLeft);
+  return daysLeft
+}
+
 //index
 router.get('/engineers' , (req, res) => {
   Engineer.find({}, (err, found) => {
@@ -64,7 +74,8 @@ router.get('/engineers/:id', (req, res) => {
     res.render(
       'eng-show.ejs',
       {
-        data
+        data,
+        getNumOfDaysLeft
       }
     )
   })
