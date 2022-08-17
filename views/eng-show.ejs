@@ -11,22 +11,22 @@
     <table class='table'>
       <thead>
         <tr>
-          <td>Tasks</td>
-          <td>Days Left</td>
-          <td>Importance</td>
-          <td>Completed</td>
+          <th class="task-head">Tasks <i class="bi bi-chevron-down task-sort"></i></th>
+          <th class="days-head">Days Left <i class="bi bi-chevron-down days-sort"></i></th>
+          <th class="imp-head">Importance <i class="bi bi-chevron-down imp-sort"></i></th>
+          <th class="comp-head">Completed <i class="bi bi-chevron-down comp-sort"></i></th>
         </tr>
       </thead>
       <tbody>
         <% for (let i = 0; i < data.tasks.length; i++) { %>
           <tr>
-            <td><a href="/home/<%=data.tasks[i].id%>"><%=data.tasks[i].name%></a></td>
-            <td><%=getNumOfDaysLeft(data.tasks[i].dueDate)%></td>
-            <td><%=data.tasks[i].importance%></td>
+            <td class="td-task"><a class="task-link" href="/home/<%=data.tasks[i].id%>"><%=data.tasks[i].name%></a></td>
+            <td class="td-days"><%=getNumOfDaysLeft(data.tasks[i].dueDate)%></td>
+            <td class="td-imp"><%=data.tasks[i].importance%></td>
             <% if (data.tasks[i].completed) { %>
-              <td>Yes</td>
+              <td class="td-comp">Yes</td>
             <% } else { %>
-              <td>No</td>
+              <td class="td-comp">No</td>
             <% } %>
           </tr>
         <% } %>
@@ -41,5 +41,106 @@
       </form>
     </div>
     <%- include ('../partials/footer.ejs') %>
+    <script>
+    let myArray = []
+
+    for (let i = 0; i < <%=data.tasks.length%>; i++) {
+      const obj = {
+        task: $('.td-task').eq(i).text(),
+        link: $('.task-link').eq(i),
+        days: Number($('.td-days').eq(i).html()),
+        imp: $('.td-imp').eq(i).text(),
+        comp: $('.td-comp').eq(i).text()
+      }
+      myArray.push(obj)
+    }
+    // console.log(myArray);
+
+    $taskHeader = $('.task-head')
+    let taskDir = 'desc'
+    $taskHeader.on('click', () => {
+      if (taskDir === 'desc') {
+        myArray = _.sortBy(myArray, 'task')
+        $('.task-sort').remove()
+        $('<i>').addClass('bi bi-chevron-down task-sort').appendTo($taskHeader)
+        taskDir = 'asc'
+      } else {
+        myArray = _.sortBy(myArray, 'task').reverse()
+        $('.task-sort').remove()
+        $('<i>').addClass('bi bi-chevron-up task-sort').appendTo($taskHeader)
+        taskDir = 'desc'
+      }
+      buildTable(myArray)
+    })
+
+    $daysHeader = $('.days-head')
+    let dayDir = 'desc'
+    $daysHeader.on('click', () => {
+      if (dayDir === 'desc') {
+        myArray = _.sortBy(myArray, 'days')
+        $('.days-sort').remove()
+        $('<i>').addClass('bi bi-chevron-up days-sort').appendTo($daysHeader)
+        dayDir = 'asc'
+      } else {
+        myArray = _.sortBy(myArray, 'days').reverse()
+        $('.days-sort').remove()
+        $('<i>').addClass('bi bi-chevron-down days-sort').appendTo($daysHeader)
+        dayDir = 'desc'
+      }
+      console.log(myArray);
+      buildTable(myArray)
+    })
+
+    $impHeader = $('.imp-head')
+    let impDir = 'desc'
+    $impHeader.on('click', () => {
+      if (impDir === 'desc') {
+        myArray = _.sortBy(myArray, 'imp')
+        $('.imp-sort').remove()
+        $('<i>').addClass('bi bi-chevron-up imp-sort').appendTo($impHeader)
+        impDir = 'asc'
+      } else {
+        myArray = _.sortBy(myArray, 'imp').reverse()
+        $('.imp-sort').remove()
+        $('<i>').addClass('bi bi-chevron-down imp-sort').appendTo($impHeader)
+        impDir = 'desc'
+      }
+      buildTable(myArray)
+    })
+
+    $compHeader = $('.comp-head')
+    let compDir = 'desc'
+    $compHeader.on('click', () => {
+      if (compDir === 'desc') {
+        myArray = _.sortBy(myArray, 'comp')
+        $('.comp-sort').remove()
+        $('<i>').addClass('bi bi-chevron-up comp-sort').appendTo($compHeader)
+        compDir = 'asc'
+      } else {
+        myArray = _.sortBy(myArray, 'comp').reverse()
+        $('.comp-sort').remove()
+        $('<i>').addClass('bi bi-chevron-down comp-sort').appendTo($compHeader)
+        compDir = 'desc'
+      }
+      buildTable(myArray)
+    })
+
+
+    const buildTable = (array) => {
+      $('tbody').remove()
+
+      $tbody = $('<tbody>').appendTo($('table'))
+
+      for (let i = 0; i < array.length; i++) {
+        const $row = $('<tr>').appendTo($tbody)
+        $tdTask = $('<td>').addClass('td-task').appendTo($row)
+        $links = array[i].link.appendTo($tdTask)
+        $tdDays = $('<td>').addClass('td-days').text(array[i].days).appendTo($row)
+        $tdImp = $('<td>').addClass('td-imp').text(array[i].imp).appendTo($row)
+        $tdComp = $('<td>').addClass('td-comp').text(array[i].comp).appendTo($row)
+
+      }
+    }
+    </script>
   </body>
 </html>

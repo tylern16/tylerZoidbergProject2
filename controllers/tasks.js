@@ -91,7 +91,7 @@ router.post('/home', (req, res) => {
 router.get('/home/:id/edit', (req, res)=>{
     Tasks.findById(req.params.id, (err, foundTask)=>{
       Engineers.find({}, (err, allEng) => {
-        Engineers.findOne({'tasks_.id':req.params.id}, (err, foundTaskEng) => {
+        Engineers.findOne({'tasks._id':req.params.id}, (err, foundTaskEng) => {
           res.render(
             'edit.ejs',
             {

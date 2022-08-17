@@ -11,15 +11,15 @@
     <table class="table">
       <thead>
         <tr>
-          <th>Name</th>
-          <th># of Assigned Projects</th>
+          <th class="name-header">Name <i class="bi bi-chevron-down name-sort"></i></th>
+          <th class="num-header"># of Assigned Projects <i class="bi bi-chevron-down num-sort"></i></th>
         </tr>
       </thead>
       <tbody>
         <% for (let i = 0; i < data.length; i++) { %>
           <tr class='row<%=i%>'>
-            <td><a href="/engineers/<%=data[i].id%>"><%=data[i].name%></a></td>
-            <td><%=data[i].tasks.length%></td>
+            <td class='td-name'><a class="eng-link" href="/engineers/<%=data[i].id%>"><%=data[i].name%></a></td>
+            <td class="td-num"><%=data[i].tasks.length%></td>
           </tr>
         <% } %>
       </tbody>
@@ -29,4 +29,68 @@
     </form>
     <%- include ('../partials/footer.ejs') %>
   </body>
+  <script>
+    let myEngArray = []
+
+    for (let i = 0; i < <%=data.length%>; i++) {
+      const obj = {
+        name: $('.td-name').eq(i).text(),
+        num: $('.td-num').eq(i).text(),
+        link: $('.eng-link').eq(i)
+      }
+      myEngArray.push(obj)
+    }
+    console.log(myEngArray);
+
+    $nameHeader = $('.name-header')
+    let nameDir = 'desc'
+    $nameHeader.on('click', () => {
+      if (nameDir === 'desc') {
+        myEngArray = _.sortBy(myEngArray, 'name')
+        $('.name-sort').remove()
+        $('<i>').addClass('bi bi-chevron-down name-sort').appendTo($nameHeader)
+        nameDir = 'asc'
+      } else {
+        myEngArray = _.sortBy(myEngArray, 'name').reverse()
+        $('.name-sort').remove()
+        $('<i>').addClass('bi bi-chevron-up name-sort').appendTo($nameHeader)
+        nameDir = 'desc'
+      }
+      buildTable(myEngArray)
+
+    })
+
+    $numHeader = $('.num-header')
+    let numDir = 'desc'
+    $numHeader.on('click', () => {
+      if (numDir === 'desc') {
+        myEngArray = _.sortBy(myEngArray, 'num')
+        $('.num-sort').remove()
+        $('<i>').addClass('bi bi-chevron-up num-sort').appendTo($numHeader)
+        numDir = 'asc'
+      } else {
+        myEngArray = _.sortBy(myEngArray, 'num').reverse()
+        $('.num-sort').remove()
+        $('<i>').addClass('bi bi-chevron-down num-sort').appendTo($numHeader)
+        numDir = 'desc'
+      }
+      buildTable(myEngArray)
+    })
+
+    const buildTable = (array) => {
+      $('tbody').remove()
+
+      $tbody = $('<tbody>').appendTo($('table'))
+
+      for (let i = 0; i < array.length; i++) {
+        const $row = $('<tr>').appendTo($tbody)
+        $tdName = $('<td>').addClass('td-name').appendTo($row)
+        $tdImportance = $('<td>').addClass('td-num').text(array[i].num).appendTo($row)
+        $links = array[i].link.appendTo($tdName)
+      }
+    }
+
+
+
+  </script>
 </html>
